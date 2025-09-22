@@ -1,3 +1,16 @@
 ### Get / route    
 GET  http://localhost:3000/
 Content-Type: application/json
+
+### Get users
+GET http://localhost:3000/users
+Content-Type: application/json
+
+### Post new user
+POST http://localhost:3000/users
+Content-Type: application/json
+{
+    "name": "ember", 
+    "email": "ember@gmail.com", 
+    "password": "123"
+}
