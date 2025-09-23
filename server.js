@@ -15,7 +15,7 @@ let weather=[];
 const USERS_FILE=path.join(__dirname,'users.json')
 const WEATHER_FILE=path.join(__dirname,'weather.json')
 
-//loadusers();
+loadusers();
 
 //-------------remindergithub----
 /*
@@ -27,21 +27,80 @@ git push -u origin main
 //--------------------------------User lekérdezések----------------------------------------
 
 app.get("/",(req, res) => {
-    res.send('hello');
+    res.send('Ács Benjámin Időjárás fullstack');
 });
+//Get all users
 app.get("/users",(req, res) => {
  
     res.send(users );
 });
+//new user
 app.post("/users",(req, res) =>{
     let data = req.body;
     if(isEmailValid(data.email)) {
         return res.status(400).send({msg: "Már létező email cím"});
     }
-    data.id = getnextid();
+    data.id = GetnextId();
     users.push(data);
-    saveusers();
+    Saveusers();
     res.send({msg: "Sikeres regisztráció"});
+})
+//user keresése id alapján
+app.get("/users/:id",(req, res) => {
+    let id = req.params.id
+    let idx = users.findIndex(user=>user.id ==id)
+    if(idx>-1){
+      return(res.send(users[idx]))
+    }
+    return "Nincs ilyen id-s user"
+});
+//felhasználó bejelentkezése
+app.post("/users/login", (req,res) =>{
+    let {email, password} = req.body;
+    let loggeduser = {};
+    users.forEach(user =>{
+      if(user.email == email && user.password == password){
+        loggeduser = user
+        return;
+      }
+    })
+    res.send(loggeduser)
+})
+//Adatváltás email alapján
+app.patch("/users/profile",(req, res) => {
+  let data = req.body;
+  let idx = users.findIndex(user => user.email == data.email);
+  if (idx>-1) {
+    users[idx] = data;
+    users[idx].id = GetnextId();
+    Saveusers();
+    return res.send(users[idx]);
+  }
+});
+//Adatváltás id alapján
+app.patch("/users/:id",(req, res) => {
+  let data = req.body;
+  if(isEmailValid(data.email)) {
+    return res.status(400).send({msg: "Már létező email cím"});
+  }
+  let id = req.params.id;
+  let idx = users.findIndex(user => user.id == id);
+  if (idx>-1) {
+    users[idx] = data;
+    users[idx].id = Number(id);
+    return res.send(users[idx]);
+  }
+  return res.status(400).send("Nincs ilyen id-jű user" );
+});
+//Adat törlés id alapján
+app.delete("/users/:id",(req, res) => {
+  let id = req.params.id;
+  let idx = users.findIndex(user => user.id == id);  
+  if (idx>-1) {
+    users.splice(idx,1);
+    Saveusers();
+    return res.send(users);
+  }
 })
 //--------------------------------User functions---------------------------------------------
 
@@ -70,7 +129,7 @@ function isEmailValid(email) {
     });
     return exist;
 }
-/*function loadusers() {
+function loadusers() {
     if(fs.existsSync(USERS_FILE)) {
       const raw = fs.readFileSync(USERS_FILE);
       try {
@@ -82,8 +141,8 @@ function isEmailValid(email) {
       }
     }
     else {
-      saveusers();
+      Saveusers();
     }
-}*/
+}
 app.listen(3000);
 
