@@ -1,0 +1,33 @@
+### Adding a new weather
+POST http://localhost:3000/weather
+Content-Type: application/json
+
+{
+    "date": "2025.09.23", 
+    "temp": 25, 
+    "weather": "derült",
+    "userid": 1
+}
+
+###Getting a new weather
+GET http://localhost:3000/weather
+Content-Type: application/json
+
+### adat törtlés id alapján
+DELETE  http://localhost:3000/weather/1
+Content-Type: application/json
+
+### Időjárás kiírása user id-vel
+GET http://localhost:3000/weather/user/1
+Content-Type: application/json
+
+### Időjárás szerkesztés id alapján
+PATCH   http://localhost:3000/weather/1
+Content-Type: application/json
+
+{
+    "date":"2025.09.22",
+    "temp":25,
+    "weather":"Gyengén felhős",
+    "userid":1
+}

@@ -29,26 +29,24 @@ Content-Type: application/json
     "password": "123"
 }
 
-### adat változtatás email alapján
-PATCH http://localhost:3000/users/profile
-Content-Type: application/json
-
-{
-    "name": "petike",
-    "email": "123@gmail.com",
-    "password": "123"
-}
-
-### adat változtatása id alapján
-PATCH  http://localhost:3000/users/2
-Content-Type: application/json
-
-{
-    "name": "PETIKE", 
-    "email": "123@gmail.com", 
-    "password": "1234"
-}
-
 ### adat törtlés id alapján
 DELETE  http://localhost:3000/users/2
 Content-Type: application/json
+
+### Email,név módosítás
+PATCH  http://localhost:3000/users/profile/2
+Content-Type: application/json
+
+{
+    "name":"peti",
+    "email":"123@gmail.com"
+}
+
+### Jelszó változtatása
+PATCH  http://localhost:3000/users/password/2
+Content-Type: application/json
+
+{
+    "oldpass": "1234",
+    "newpass": "123"
+}
