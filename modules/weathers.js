@@ -26,8 +26,8 @@ router.get("/",(req, res) => {
     } 
     data.id = GetnextId("weather");
     weathers.push(data);
-    Saveweather();
-    res.send({msg: "Sikeres Időjárás"});
+    Saveweather(weathers);
+    res.send(weathers);
   })
   //Időjárás szerkesztése
   router.patch("/:id",(req, res) => {
@@ -38,7 +38,7 @@ router.get("/",(req, res) => {
       
       weathers[idx] = data;
       weathers[idx].id = Number(id);
-      Saveweather();
+      Saveweather(weathers);
       return res.send(weathers[idx] );
     }
     return res.status(400).send("Nincs ilyen id-jű lépésszám" );
@@ -49,7 +49,7 @@ router.get("/",(req, res) => {
     let idx = weathers.findIndex(weather => weather.id == id);  
     if (idx>-1) {
       weathers.splice(idx,1);
-      Saveweather();
+      Saveweather(weathers);
       return res.send(weathers);
     }
   })

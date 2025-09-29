@@ -11,13 +11,13 @@ POST http://localhost:3000/users
 Content-Type: application/json
 
 {
-    "name": "PETIKE", 
-    "email": "123@gmail.com", 
+    "name": "beni", 
+    "email": "beni@gmail.com", 
     "password": "123"
 }
 
 ### Get user by ID
-GET  http://localhost:3000/users/1
+GET  http://localhost:3000/users/2
 Content-Type: application/json
 
 ### Login user
@@ -34,12 +34,12 @@ DELETE  http://localhost:3000/users/2
 Content-Type: application/json
 
 ### Email,név módosítás
-PATCH  http://localhost:3000/users/profile/2
+PATCH  http://localhost:3000/users/profile/3
 Content-Type: application/json
 
 {
     "name":"peti",
-    "email":"123@gmail.com"
+    "email":"1234@gmail.com"
 }
 
 ### Jelszó változtatása

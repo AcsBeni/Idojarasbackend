@@ -3,9 +3,10 @@ POST http://localhost:3000/weather
 Content-Type: application/json
 
 {
-    "date": "2025.09.23", 
+    "date": "2025.09.20", 
+    "mintemp":10,
     "temp": 25, 
-    "weather": "derült",
+    "weather": "Borult",
     "userid": 1
 }
 

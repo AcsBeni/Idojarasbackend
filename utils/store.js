@@ -16,10 +16,10 @@ function Initstore(){
     loadusers();
     loadweathers();
 }
-function Saveusers(){
+function Saveusers(users){
     fs.writeFileSync(USERS_FILE,JSON.stringify(users));
 }
-function Saveweather(){
+function Saveweather(weathers){
   fs.writeFileSync(WEATHERS_FILE,JSON.stringify(weathers))
 }
 function GetnextId(database){
@@ -82,7 +82,7 @@ function loadusers() {
       }
     }
     else {
-      Saveusers();
+      Saveusers(users);
     }
 }
 function loadweathers(){

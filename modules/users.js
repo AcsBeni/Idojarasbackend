@@ -22,7 +22,7 @@ router.post("/",(req, res) =>{
     }
     data.id = GetnextId("user");
     users.push(data);
-    Saveusers();
+    Saveusers(users);
     res.send({msg: "Sikeres regisztráció"});
 })
 //user keresése id alapján
@@ -52,7 +52,7 @@ router.delete("/:id",(req, res) => {
   let idx = users.findIndex(user => user.id == id);  
   if (idx>-1) {
     users.splice(idx,1);
-    Saveusers();
+    Saveusers(users);
     return res.send(users);
   }
 })
@@ -70,7 +70,7 @@ router.patch('/profile/:id', (req, res) => {
           users[idx].email = data.email
       }
       if (data.name) users[idx].name = data.name
-      Saveusers()
+      Saveusers(users)
       return res.send(users[idx])
   }
   return res.status(400).send("Nincs ilyen azonosítójú felhasználó!")
@@ -89,7 +89,7 @@ router.patch('/password/:id', (req, res) => {
               return res.status(400).send("Az új jelszó nem lehet ugyanaz, mint a régi!")
           }
           users[idx].password = data.newpass
-          Saveusers()
+          Saveusers(users)
           return res.send(users[idx])
       }
       return res.status(400).send({ msg: "Nincsenek meg a szükséges adatok!" })
