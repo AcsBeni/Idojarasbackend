@@ -20,7 +20,7 @@ router.post("/",(req, res) =>{
     if(isEmailValid(data.email)) {
         return res.status(400).send({msg: "Már létező email cím"});
     }
-    data.id = GetnextId("user");
+    data.id = GetnextId(users);
     users.push(data);
     Saveusers(users);
     res.send({msg: "Sikeres regisztráció"});

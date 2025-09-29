@@ -22,33 +22,19 @@ function Saveusers(users){
 function Saveweather(weathers){
   fs.writeFileSync(WEATHERS_FILE,JSON.stringify(weathers))
 }
-function GetnextId(database){
-  let nextid = 1;
-  let maxid = 0;
-  switch(database){
-      case("weather"):
-        if(weathers.length==0) {
-          return nextid;
+function GetnextId(table){
+  
+    let nextID = 1;
+    if (table.length == 0){
+        return nextID;
+    }
+    let maxindex = 0
+    for (let i = 1; i < table.length; i++) {
+        if (table[i].id > table[maxindex].id) {
+            maxindex = i;     
         }
-        maxid=0;
-        for (let i=0; i<weathers.length; i++) {
-          if(weathers[i].id>weathers[maxid].id) {
-            maxid = i;
-          }
-        }
-        return users[maxid].id+1;
-      case("user"):
-        if(users.length==0) {
-          return nextid;
-        }
-        maxid = 0;
-        for (let i=0; i<users.length; i++) {
-          if(users[i].id>users[maxid].id) {
-            maxid = i;
-          }
-        }
-        return users[maxid].id+1;
-  }
+    }
+    return table[maxindex].id + 1;
 }
 //ellenőrzi hogy van-e ilyen Email
 function isEmailValid(email) {

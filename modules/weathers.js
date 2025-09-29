@@ -24,7 +24,7 @@ router.get("/",(req, res) => {
     if(isDateValid(data.date)) {
       return res.status(400).send({msg: "Már létező dátum"});
     } 
-    data.id = GetnextId("weather");
+    data.id = GetnextId(weathers);
     weathers.push(data);
     Saveweather(weathers);
     res.send(weathers);
