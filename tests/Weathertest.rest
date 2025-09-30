@@ -3,11 +3,11 @@ POST http://localhost:3000/weather
 Content-Type: application/json
 
 {
-    "date": "2025.09.30", 
+    "date": "2025-10-20", 
     "mintemp":10,
     "temp": 25, 
-    "weather": "zivatar",
-    "userid": 1
+    "weather": "Zivatar",
+    "userid": 2
 }
 
 ###Getting a new weather
@@ -23,12 +23,13 @@ GET http://localhost:3000/weather/user/1
 Content-Type: application/json
 
 ### Időjárás szerkesztés id alapján
-PATCH   http://localhost:3000/weather/1
+PATCH   http://localhost:3000/weather/16
 Content-Type: application/json
 
 {
-    "date":"2025.09.22",
+    "date":"2025-10-20",
+    "mintemp":15,
     "temp":25,
     "weather":"Gyengén felhős",
-    "userid":1
+    "userid":2
 }

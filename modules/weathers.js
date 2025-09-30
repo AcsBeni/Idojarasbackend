@@ -21,13 +21,10 @@ router.get("/",(req, res) => {
   //új időjárás
   router.post("/",(req, res) =>{
     let data = req.body;
-    if(isDateValid(data.date)) {
-      return res.status(400).send({msg: "Már létező dátum"});
-    } 
     data.id = GetnextId(weathers);
     weathers.push(data);
     Saveweather(weathers);
-    res.send(weathers);
+    return res.send(weathers)
   })
   //Időjárás szerkesztése
   router.patch("/:id",(req, res) => {
